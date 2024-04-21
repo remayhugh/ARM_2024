@@ -35,13 +35,13 @@ function [res,state] = doGrip(type,optns)
 
     if waitForServer(r.grip_action_client)
         disp('Connected to action server. Sending goal...')
-        [res,state,~] = sendGoalAndWait(r.grip_action_client,grip_goal);
+        [res,state,status] = sendGoalAndWait(r.grip_action_client,grip_goal);
     else
         % Re-attempt
         disp('First try failed... Trying again...');
-        [res,state,~] = sendGoalAndWait(r.grip_action_client,grip_goal);
+        [res,state,status] = sendGoalAndWait(r.grip_action_client,grip_goal);
     end    
 
     %% Clear grip_action_client: checking to see if this minimizes ROS network connection errors
-    clear r.grip_action_client;
+    clear grip_action_client;
 end

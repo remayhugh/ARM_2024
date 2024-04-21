@@ -9,19 +9,24 @@ function mat_current = lift(mat_current,optns)
 % Output
 % mat_current [4x4]
 %--------------------------------------------------------------------------
+    x_offset = optns("x_offset");
+    x_offset = x_offset{1};
+    y_offset = optns("y_offset");
+    y_offset = y_offset{1};
     z_offset = optns("z_offset");
     z_offset = z_offset{1};
-    y_offset = optns("y_offset");
-    y_offset = y_offset{1}; 
+ 
     
     % Check Inputs
     [r,c] = size(mat_current);
     assert(r==4&&c==4,'lift:mat_current is not a 4x4');
-    assert(isa(z_offset,'double'), 'z_offset is not a double')
+    assert(isa(y_offset,'double'), 'x_offset is not a double')
     assert(isa(y_offset,'double'), 'y_offset is not a double')
-    % Add offset to z-position
-    mat_current(2,4) = mat_current(2,4) + y_offset;
-
+    assert(isa(z_offset,'double'), 'z_offset is not a double')
+    % Add offset to y-position
+    mat_current(1,4) = mat_current(1,4) + y_offset;
+    % Add offset to y-position
+    mat_current(2,4) = mat_current(2,4) + x_offset;
     % Add offset to z-position
     mat_current(3,4) = mat_current(3,4) + z_offset;
 end

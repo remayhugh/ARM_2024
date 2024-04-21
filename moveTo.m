@@ -67,11 +67,11 @@ function traj_result = moveTo(mat_R_T_M,optns)
     disp('Sending traj to action server...')
     if waitForServer(r.pick_traj_act_client)
         disp('Connected to action server. Sending goal...')
-        [traj_result,~,~] = sendGoalAndWait(r.pick_traj_act_client,traj_goal);
+        [traj_result,state,status] = sendGoalAndWait(r.pick_traj_act_client,traj_goal);
     else
         % Re-attempt
         disp('First try failed... Trying again...');
-        [traj_result,~,~] = sendGoalAndWait(r.pick_traj_act_client,traj_goal);
+        [traj_result,state,status] = sendGoalAndWait(r.pick_traj_act_client,traj_goal);
     end 
 
     traj_result = traj_result.ErrorCode;
@@ -80,5 +80,5 @@ function traj_result = moveTo(mat_R_T_M,optns)
     %cancelGoal(pick_traj_act_client);
 
     %% Clear pick_traj_act_client: checking to see if this minimizes ROS network connection errors
-    clear r.pick_traj_act_client;
+    clear pick_traj_act_client;
 end

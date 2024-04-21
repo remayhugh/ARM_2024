@@ -15,6 +15,10 @@ function [res,q] = moveToQ(config,optns)
     r = optns('rHandle');
     r = r{1};
     ros_cur_jnt_state_msg = receive(r.joint_state_sub,1);
+    traj_steps = optns('traj_steps');
+    traj_steps = traj_steps{1};
+    traj_duration = optns('traj_duration');
+    traj_duration = traj_duration{1};
 
     % pick_traj_act_client = rosactionclient('/pos_joint_traj_controller/follow_joint_trajectory',...
     %                                        'control_msgs/FollowJointTrajectory', ...
@@ -43,7 +47,7 @@ function [res,q] = moveToQ(config,optns)
     end
 
     %% Convert to ROS waypoint
-    traj_goal = convert2ROSPointVec(q,ros_cur_jnt_state_msg.Name,1,1,traj_goal,optns);
+    traj_goal = convert2ROSPointVec(q,ros_cur_jnt_state_msg.Name,traj_steps,traj_duration,traj_goal,optns);
     
     %% Send ros trajectory with traj_steps
     if waitForServer(r.pick_traj_act_client)
@@ -58,6 +62,6 @@ function [res,q] = moveToQ(config,optns)
     res = res.ErrorCode;
 
     %% Clear pick_traj_act_client: checking to see if this minimizes ROS network connection errors
-    clear r.pick_traj_act_client;    
+    clear pick_traj_act_client;    
     
 end

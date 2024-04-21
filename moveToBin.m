@@ -41,7 +41,7 @@ function grip_result = moveToBin(strategy,mat_current,mat_bin,optns)
 
     %% 3. Place if successfull (check structure of resultState). Otherwise...
     if ~traj_result
-        [grip_result, grip_state] = doGrip('place',optns); 
+        [grip_result, ~] = doGrip('place',optns); 
         grip_result = grip_result.ErrorCode;
     end
 end

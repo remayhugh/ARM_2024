@@ -1,4 +1,4 @@
-function matlab_pose = ros2matlabPose(p,frameAdjustmentFlag,toolAdjustmentFlag)
+function matlab_pose = ros2matlabPose(p,frameAdjustmentFlag,toolAdjustmentFlag,optns)
     %----------------------------------------------------------------------
     % ros2matlabPose
     % Converts ros pose to matlab pose according to type. Handles two Pose
