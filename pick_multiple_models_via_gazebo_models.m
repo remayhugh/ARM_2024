@@ -9,10 +9,15 @@ pause(2);       % Check if more down time helps diminish connection errors
 masterhostIP = "192.168.64.129";
 rosinit(masterhostIP)
 
+% if exist('r','var') && isvalid(r)
+%     disp('Robot handle exists and is valid.')
+% else
+%     r = rosClassHandle;
+% end
 r = rosClassHandle;
 
 keys   = ["debug", "toolFlag", "traj_steps", "x_offset", "y_offset", "z_offset", "traj_duration", "frameAdjustmentFlag", "toolAdjustmentFlag", "toolAdjustment", "rHandle"];
-values = {      0,          0,            1,      -0.02,      -0.25,        0.2,               2,                     1,                    1,            0.165,         r};
+values = {      0,          0,            1,      0,      0,        0.2,               2,                     1,                    1,            0.165,         r};
 optns = dictionary(keys,values);
 
 %% 02 Go Home
@@ -28,7 +33,7 @@ mod_sz = length(model_names);
 
 % Loop through them.
 rate = rosrate(1);
-for i=1:2
+for i=1:mod_sz
     nm = model_names{i};
     fprintf('Picking up model: %s \n',nm);
     [mat_R_T_G, mat_R_T_M] = get_robot_object_pose_wrt_base_link(nm,0,optns);

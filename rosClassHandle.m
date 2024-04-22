@@ -1,4 +1,4 @@
-classdef rosClassHandle < handle
+classdef rosClassHandle
 % Class definition — Description of what is common to every instance of a
 % class.
 
@@ -42,8 +42,8 @@ classdef rosClassHandle < handle
                                                    'control_msgs/FollowJointTrajectory', ...
                                                    'DataFormat', 'struct');
         %YOLO
-        rgb_sub       = rossubscriber('/camera/rgb/image_raw');
-        pt_cloud_sub  = rossubscriber('/camera/depth/points');
+        rgb_sub                 = rossubscriber('/camera/rgb/image_raw');
+        pt_cloud_sub            = rossubscriber('/camera/depth/points');
 
     end
     methods (Access = public)

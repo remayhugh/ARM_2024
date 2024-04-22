@@ -36,7 +36,7 @@ function matlab_pose = ros2matlabPose(p,frameAdjustmentFlag,toolAdjustmentFlag,o
 
     % Flags
     if nargin == 1
-        frameAdjustmentFlag    = 0;
+        frameAdjustmentFlag = 0;
         toolAdjustmentFlag = 0;
 
     else if nargin == 2
@@ -84,7 +84,7 @@ function matlab_pose = ros2matlabPose(p,frameAdjustmentFlag,toolAdjustmentFlag,o
             q = UnitQuaternion(p.Pose.Orientation.W, ...
                                [-p.Pose.Orientation.Y, ...
                                  p.Pose.Orientation.X, ...
-                                (p.Pose.Orientation.Z + endEffectorAdjustment)]);
+                                (p.Pose.Orientation.Z)]);
         % 'geometry_msgs/TransformStamped'
         elseif strcmp(p.MessageType, 'geometry_msgs/TransformStamped')
             pos = [-p.Transform.Translation.Y, ...
@@ -94,7 +94,7 @@ function matlab_pose = ros2matlabPose(p,frameAdjustmentFlag,toolAdjustmentFlag,o
             q = UnitQuaternion(p.Transform.Rotation.W, ...
                                [-p.Transform.Rotation.Y, ...
                                 p.Transform.Rotation.X, ...
-                               (p.Transform.Rotation.Z + endEffectorAdjustment)] );
+                               (p.Transform.Rotation.Z)] );
         end
     end
 
