@@ -15,16 +15,17 @@ rosinit(masterhostIP)
 %     r = rosClassHandle;
 % end
 r = rosClassHandle;
-
+%y = yoloClassHandle;
 keys   = ["debug", "toolFlag", "traj_steps", "x_offset", "y_offset", "z_offset", "traj_duration", "frameAdjustmentFlag", "toolAdjustmentFlag", "toolAdjustment", "rHandle"];
-values = {      0,          0,            1,      0,      0,        0.2,               2,                     1,                    1,            0.165,         r};
+values = {      0,          0,            1,          0,          0,        0.2,               2,                     1,                    1,            0.165,         r};
 optns = dictionary(keys,values);
 
 %% 02 Go Home
 disp('Going home...');
-goHome('qr',optns);    % moves robot arm to a qr or qz start config
+goHome('qtest',optns);    % moves robot arm to a qr or qz start config
 
 resetWorld;      % reset models through a gazebo service
+playingAround(optns);
 
 %% 03 Get Pose from Gazebo Models
 disp('Getting goal...') 

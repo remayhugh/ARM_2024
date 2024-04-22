@@ -20,10 +20,6 @@ function [res,q] = moveToQ(config,optns)
     traj_duration = optns('traj_duration');
     traj_duration = traj_duration{1};
 
-    % pick_traj_act_client = rosactionclient('/pos_joint_traj_controller/follow_joint_trajectory',...
-    %                                        'control_msgs/FollowJointTrajectory', ...
-    %                                        'DataFormat', 'struct');
-    
     % Create action goal message from client
     traj_goal = rosmessage(r.pick_traj_act_client); 
 
@@ -39,6 +35,8 @@ function [res,q] = moveToQ(config,optns)
     elseif(strcmp(config,'qz'))
         q = zeros(1,6);
     
+    elseif(strcmp(config,'qtest'))
+        q = [pi/4 0 pi/2 -pi/2 0 0];
     % Default to qr
     else
         % Default to qr ready config
