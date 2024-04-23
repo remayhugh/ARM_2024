@@ -51,7 +51,7 @@ T = transl(pos) * q.T;
 
 %% Transform the pt cloud (i.e. trying to do what you see in https://www.mathworks.com/help/releases/R2023b/vision/ref/pctransform.html)
 % Extract Nx3 matrix of XYZ points
-xyz = readXYZ(ptcloud);         
+xyz = rosReadXYZ(ptcloud);         
 
 % Remove NaNs
 xyz = xyz(~isnan(xyz(:,1)),:);

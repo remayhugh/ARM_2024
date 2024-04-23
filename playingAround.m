@@ -92,10 +92,10 @@ function playingAround(optns)
     
     %% making ptCloud a pointCloud instead of pointCloud2
     disp("Creating updated point cloud...")
-    ptCloud1 = pointCloud(readXYZ(ptCloud));
+    ptCloud1 = pointCloud(rosReadXYZ(ptCloud));
     ptCloud1.Color = readRGB(ptCloud);
     ptCloud1.Normal = pcnormals(ptCloud1);
-    a = readXYZ(ptCloud);
+    a = rosReadXYZ(ptCloud);
     ptCloud1.Intensity = a(:,1);
     % ptCloud1.RangeData = sqrt(sum(a.^2,2))
     % ptCloud1.RangeData = readField(ptCloud,'Data');
