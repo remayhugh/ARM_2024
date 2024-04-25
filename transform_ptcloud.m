@@ -1,4 +1,4 @@
-function transformedPtCloud = transform_ptcloud(optns)
+function transformedPtCloud = transform_ptcloud(ds,optns)
 %--------------------------------------------------------------------------
 % Fix point cloud
 % Input:
@@ -9,15 +9,15 @@ function transformedPtCloud = transform_ptcloud(optns)
 %% Get pointcloud2
 r = optns('rHandle');
 r = r{1};
-ptcloud = receive(r.ds,2);
+ptcloud = receive(ds,2);
 
 %% Get base_link to camera_depth_link transform
-% tftree       = rostf('DataFormat','struct');     
+tftree       = rostf('DataFormat','struct');     
 base         = 'base_link';
 end_effector = ptcloud.Header.FrameId; %'camera_depth_link';
 % Compute the ROS/Gazebo transform from base_link to camera_depth_link
-waitForTransform(r.tftree, base, end_effector);
-p = getTransform(r.tftree, base, end_effector, rostime('now'),'Timeout', r.tf_listening_time);
+waitForTransform(tftree, base, end_effector);
+p = getTransform(tftree, base, end_effector, rostime('now'),'Timeout', r.tf_listening_time);
 
 %% Get position and orientation -> Homogeneous Transform
 % Currently in ROS/Gazebo settings. No need to change anything.
@@ -51,7 +51,7 @@ T = transl(pos) * q.T;
 
 %% Transform the pt cloud (i.e. trying to do what you see in https://www.mathworks.com/help/releases/R2023b/vision/ref/pctransform.html)
 % Extract Nx3 matrix of XYZ points
-xyz = rosReadXYZ(ptcloud);         
+xyz = readXYZ(ptcloud);         
 
 % Remove NaNs
 xyz = xyz(~isnan(xyz(:,1)),:);

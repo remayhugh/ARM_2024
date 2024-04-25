@@ -14,9 +14,6 @@ function models = getModels(optns)
     r = r{1};
 
 % 01 Create get_model_state action client
-% get_models_client = rossvcclient('/gazebo/get_world_properties',...
-%                                  'DataFormat','struct');
-
 % 02 Create model_client_msg 
 get_models_client_msg = rosmessage(r.get_models_client);
 

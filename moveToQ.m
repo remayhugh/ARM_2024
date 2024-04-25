@@ -36,7 +36,7 @@ function [res,q] = moveToQ(config,optns)
         q = zeros(1,6);
     
     elseif(strcmp(config,'qtest'))
-        q = [pi/4 0 pi/2 -pi/2 0 0];
+        q = [0 pi/4 pi/4 -pi/2 0 0];
     % Default to qr
     else
         % Default to qr ready config
@@ -60,6 +60,6 @@ function [res,q] = moveToQ(config,optns)
     res = res.ErrorCode;
 
     %% Clear pick_traj_act_client: checking to see if this minimizes ROS network connection errors
-    clear pick_traj_act_client;    
+    clear r.pick_traj_act_client;    
     
 end

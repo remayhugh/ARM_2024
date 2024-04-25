@@ -32,18 +32,17 @@ function [mat_R_T_G, mat_R_T_M] = get_robot_object_pose_wrt_base_link(model_name
     disp('Setting the goal...');
 
     % Robot's base_link and model pose wrt gazebo world origin
-    W_T_R = get_model_pose('robot',optns);
-    W_T_M = get_model_pose(model_name,optns);
+    W_T_R = get_model_pose('robot', optns);
+    W_T_M = get_model_pose(model_name, optns);
     
     %% 2. Get Goal|Current Pose wrt to **MATLAB** base link in matlab format
-    mat_W_T_R = ros2matlabPose(W_T_R, frameAdjustmentFlag, toolAdjustmentFlag,optns);
-    mat_W_T_M = ros2matlabPose(W_T_M, frameAdjustmentFlag, toolAdjustmentFlag,optns); % Frame at junction with table
+    mat_W_T_R = ros2matlabPose(W_T_R, frameAdjustmentFlag, toolAdjustmentFlag, optns);
+    mat_W_T_M = ros2matlabPose(W_T_M, frameAdjustmentFlag, toolAdjustmentFlag, optns); % Frame at junction with table
     
     % Change reference frame from world to robot's base_link
-    mat_R_T_M = inv(mat_W_T_R)*mat_W_T_M; 
+    mat_R_T_M = inv(mat_W_T_R)*mat_W_T_M; %#ok<MINV>
 
     %z_offset = 0.052; %0.052; % Can height is 5.2cm
-    %mat_R_T_M(1,4) = mat_R_T_M(1,4) - y_offset;
     mat_R_T_M(3,4) = mat_R_T_M(3,4) + z_offset; % Offset along +z_base_link to simulate knowing height of top of can.
     
     

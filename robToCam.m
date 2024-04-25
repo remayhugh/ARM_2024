@@ -1,11 +1,11 @@
 function mat_R_T_C = robToCam(optns)
-    % r = optns('rHandle');
-    % r = r{1};
-    z_offset = optns('rHandle');
+    r = optns('rHandle');
+    r = r{1};
+    %z_offset = optns('rHandle');
     %z_offset = z_offset{1};
 
     %% Local variables
-    tf_listening_time   = 10;    % Time (secs) to listen for transformation in ros
+    tf_listening_time   % Time (secs) to listen for transformation in ros
     frameAdjustmentFlag = 1;     % Indicates matlab's base_link does not match ros. Need adjustment.
     toolAdjustmentFlag  = 1;     % Indicates we have fingers but have not adjusted IKs for it.    
    
@@ -30,16 +30,17 @@ function mat_R_T_C = robToCam(optns)
     %mat_R_T_C = eye(4,4);
 
     if 1
-        tftree       = rostf('DataFormat','struct');     
+        %tftree       = rostf('DataFormat','struct');    
+        r.tftree;
         base         = 'base_link';
         end_effector = 'camera_depth_link'; % When finger is properly modeled use 'gripper_tip_link'
     
         % Get end-effector pose wrt to base via getTransform(tftree,targetframe,sourceframe), where sourceframe is the reference frame 
         try
-            current_pose = getTransform(tftree,end_effector,base,rostime('now'),'Timeout', tf_listening_time);
+            current_pose = getTransform(r.tftree,end_effector,base,rostime('now'),'Timeout', tf_listening_time);
         catch
             % Try again
-            current_pose = getTransform(tftree,end_effector,base,rostime('now'),'Timeout', tf_listening_time);
+            current_pose = getTransform(r.tftree,end_effector,base,rostime('now'),'Timeout', tf_listening_time);
         end
     
         % Convert gripper pose to matlab format

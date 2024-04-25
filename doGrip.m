@@ -9,6 +9,8 @@ function [res,state] = doGrip(type,optns)
     %% Init
     r = optns('rHandle');
     r = r{1};
+    gripPos = optns('gripPos');
+    gripPos = gripPos{1};
     % Create a gripper goal action message
     grip_msg = rosmessage(r.grip_action_client);
 
@@ -16,7 +18,7 @@ function [res,state] = doGrip(type,optns)
     r.grip_action_client.FeedbackFcn = [];
 
     %% Set Grip Pos by default to pick / close gripper
-    gripPos = 0.23; %0.517; % 0.23 for upright cans tends to slip. 
+    %gripPos = 0.1; %0.517; % 0.23 for upright cans tends to slip. 
 
     if nargin==0
         type = 'pick';
@@ -43,5 +45,5 @@ function [res,state] = doGrip(type,optns)
     end    
 
     %% Clear grip_action_client: checking to see if this minimizes ROS network connection errors
-    clear grip_action_client;
+    clear r.grip_action_client;
 end

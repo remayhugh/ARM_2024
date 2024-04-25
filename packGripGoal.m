@@ -57,7 +57,7 @@ function gripGoal=packGripGoal(pos,gripGoal)
     % Vel/Acc/Effort
     r.trajPtsVar.Velocities      = zeros(size(jointWaypoints));
     r.trajPtsVar.Accelerations   = zeros(size(jointWaypoints));
-    r.trajPtsVar.Effort          = 0.1.*ones(size(jointWaypoints));
+    r.trajPtsVar.Effort          = zeros(size(jointWaypoints));
     
     % Copy trajPts --> gripGoal.Trajectory.Points
     gripGoal.Trajectory.Points = r.trajPtsVar;

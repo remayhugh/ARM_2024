@@ -80,5 +80,5 @@ function traj_result = moveTo(mat_R_T_M,optns)
     %cancelGoal(pick_traj_act_client);
 
     %% Clear pick_traj_act_client: checking to see if this minimizes ROS network connection errors
-    clear pick_traj_act_client;
+    clear r.pick_traj_act_client;
 end

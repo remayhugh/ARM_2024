@@ -4,7 +4,7 @@ classdef rosClassHandle
 
 % Properties — Data storage for class instancee
     properties       
-        tf_listening_time       = 20; % for funsies because matlab yells at you if its not there :P
+        tf_listening_time       = 10; % for funsies because matlab yells at you if its not there :P
 
         % services
         joint_state_sub         = rossubscriber("/joint_states");
@@ -14,8 +14,8 @@ classdef rosClassHandle
         TimeFromStart           = rosduration(1,'DataFormat','struct');
         trajPts                 = rosmessage('trajectory_msgs/JointTrajectoryPoint','DataFormat', 'struct');
         trajPtsVar              = rosmessage('trajectory_msgs/JointTrajectoryPoint');
-        ds                      = rossubscriber("/camera/depth/points",'DataFormat','struct');
-        tftree                  = rostf('DataFormat','struct');    
+        %ds                      = rossubscriber("/camera/depth/points",'DataFormat','struct');
+        %tftree                  = rostf('DataFormat','struct');    
 
         % Actions
         get_models_client       = rossvcclient('/gazebo/get_model_state','DataFormat','struct');
